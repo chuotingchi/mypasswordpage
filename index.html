@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>密碼保護頁面</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #f4f4f4;
+    }
+    #protectedContent {
+      display: none;
+      white-space: pre-line;
+      font-size: 1.5rem;
+      text-align: center;
+      padding-top: 20vh;
+    }
+    .volleyball {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Volleyball_%28Balle%29.svg/1024px-Volleyball_%28Balle%29.svg.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: fall 3s linear infinite;
+    }
+    @keyframes fall {
+      0% { top: -50px; opacity: 1; }
+      100% { top: 100vh; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="loginContainer" style="text-align:center; margin-top:20vh;">
+    <h2>請輸入密碼</h2>
+    <input type="password" id="passwordInput" placeholder="輸入密碼">
+    <button onclick="checkPassword()">提交</button>
+  </div>
+
+  <div id="protectedContent">
+    chuotc.nicky@mail.edu.tw
+    Nicky960810
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === "1411220") {
+        document.getElementById("loginContainer").remove();
+        document.getElementById("protectedContent").style.display = "block";
+        createVolleyballEffect();
+      } else {
+        alert("密碼錯誤，請再試一次。");
+      }
+    }
+
+    function createVolleyballEffect() {
+      for (let i = 0; i < 30; i++) {
+        const ball = document.createElement('div');
+        ball.className = 'volleyball';
+        ball.style.left = Math.random() * 100 + 'vw';
+        ball.style.animationDuration = (2 + Math.random() * 2) + 's';
+        document.body.appendChild(ball);
+        setTimeout(() => ball.remove(), 4000);
+      }
+      setInterval(createVolleyballEffect, 3000);
+    }
+  </script>
+</body>
+</html>
+
+
